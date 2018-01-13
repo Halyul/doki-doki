@@ -48,7 +48,6 @@ function clean(dataFile) {
 }
 
 function add(ctx, dataFile) {
-  console.log(ctx.request.header)
   const obj = jsonfile.readFileSync(dataFile, {throws: false})
   if (obj === null) {
     const obj = {
@@ -57,11 +56,10 @@ function add(ctx, dataFile) {
     }
     obj.data.push({
       IP: ctx.request.ip,
-      IPs: ctx.request.ips,
       time: Date()
     })
     jsonfile.writeFileSync(dataFile, obj, {spaces: 2})
-    ctx.body = ctx.request.header
+    ctx.body = "Successed!"
   } else {
     obj.data.push({
       IP: ctx.request.ip,
@@ -69,7 +67,7 @@ function add(ctx, dataFile) {
     })
     obj.times++
     jsonfile.writeFileSync(dataFile, obj, {spaces: 2})
-    ctx.body = ctx.request.header
+    ctx.body = "Successed!"
   }
 }
 
