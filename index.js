@@ -60,7 +60,7 @@ function add(ctx, dataFile) {
       time: Date()
     })
     jsonfile.writeFileSync(dataFile, obj, {spaces: 2})
-    ctx.body = "Successed!"
+    ctx.body = ctx.request.header
   } else {
     obj.data.push({
       IP: ctx.request.ip,
