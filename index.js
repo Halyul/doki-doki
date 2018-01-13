@@ -68,7 +68,7 @@ function add(ctx, dataFile) {
     })
     obj.times++
     jsonfile.writeFileSync(dataFile, obj, {spaces: 2})
-    ctx.body = "Successed!"
+    ctx.body = ctx.request.header
   }
 }
 
