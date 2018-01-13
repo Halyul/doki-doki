@@ -57,6 +57,7 @@ function add(ctx, dataFile) {
     }
     obj.data.push({
       IP: ctx.request.ip,
+      IPs: ctx.request.ips,
       time: Date()
     })
     jsonfile.writeFileSync(dataFile, obj, {spaces: 2})
