@@ -3,6 +3,7 @@
  */
 const Koa = require('koa');
 const app = new Koa();
+app.proxy = true;
 const jsonfile = require('jsonfile')
 
 /**
@@ -47,6 +48,7 @@ function clean(dataFile) {
 }
 
 function add(ctx, dataFile) {
+  console.log(ctx.request.header)
   const obj = jsonfile.readFileSync(dataFile, {throws: false})
   if (obj === null) {
     const obj = {
