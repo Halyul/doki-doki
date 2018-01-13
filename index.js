@@ -33,8 +33,7 @@ app.use(async ctx => {
   };
 });
 
-const port = process.env.PORT || 3000
-app.listen(port, () => console.log('Server listening on', port))
+app.listen(3000, () => console.log('Server listening on', 3000))
 
 function clean(dataFile) {
   const obj = jsonfile.readFileSync(dataFile, {throws: false})
@@ -72,5 +71,10 @@ function add(ctx, dataFile) {
 }
 
 function get(ctx, dataFile) {
-  ctx.body = jsonfile.readFileSync(dataFile)
+  const obj = jsonfile.readFileSync(dataFile, {throws: false})
+  if (obj === null) {
+    ctx.response.status = 403
+  } else {
+    ctx.body = obj
+  }
 }
