@@ -20,7 +20,7 @@ app.use(async ctx => {
   const request = ctx.request.query.request;
   const requestKey = ctx.request.query.key;
   const device = ctx.request.query.device;
-  const configKey = config.key.toString();
+  const configKey = process.env.npm_config_key || config.key.toString();
   if (requestKey === configKey && device) {
     const dataFile = './data/' + device + '.json'
     if (request === 'add') {
@@ -34,7 +34,8 @@ app.use(async ctx => {
   };
 });
 
-app.listen(3000, () => console.log('Server listening on', 3000))
+const port = process.env.npm_config_port || 3000
+app.listen(port, () => console.log('Server listening on', port))
 
 function clean(dataFile) {
   const obj = jsonfile.readFileSync(dataFile, {throws: false})
