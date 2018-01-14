@@ -88,7 +88,7 @@ otherwise the response is 403 - `Forbidden`.
 
 ````
 
-`IP` will contain `::ffff:`, I don't know what exactly it is, maybe this is IPv6 format
+`IP`: you know what it is. About the `::ffff:` prefix, see [here](https://stackoverflow.com/questions/29411551/express-js-req-ip-is-returning-ffff127-0-0-1)
 
 `time` is when the data is added
 
