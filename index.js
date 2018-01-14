@@ -5,8 +5,7 @@ const Koa = require('koa');
 const app = new Koa();
 app.proxy = true;
 const jsonfile = require('jsonfile')
-const configPath = process.env.config_path || "./config.json"
-const config = jsonfile.readFileSync(configPath, {throws: false})
+const config = jsonfile.readFileSync("./_config.json", {throws: false})
 
 app.use(async ctx => {
   const request = ctx.request.query.request;
