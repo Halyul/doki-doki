@@ -7,20 +7,13 @@ app.proxy = true;
 const jsonfile = require('jsonfile')
 
 /**
- * Get config
- */
-const yaml = require('js-yaml');
-const fs   = require('fs');
-const config = yaml.safeLoad(fs.readFileSync('./_config.yml', 'utf8'));
-
-/**
  *
  */
 app.use(async ctx => {
   const request = ctx.request.query.request;
   const requestKey = ctx.request.query.key;
   const device = ctx.request.query.device;
-  const configKey = process.env.npm_config_key || config.key.toString();
+  const configKey = process.env.npm_config_key;
   if (requestKey === configKey && device) {
     const dataFile = './data/' + device + '.json'
     if (request === 'add') {
@@ -39,10 +32,11 @@ app.listen(port, () => console.log('Server listening on', port))
 
 function clean(dataFile) {
   const obj = jsonfile.readFileSync(dataFile, {throws: false})
+  const times = process.env.npm_config_times
   if (obj === null) {
     return
   } else {
-    if (obj.times === config.times) {
+    if (obj.times === times) {
       fs.unlinkSync(dataFile)
     }
   }
