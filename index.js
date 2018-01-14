@@ -6,9 +6,6 @@ const app = new Koa();
 app.proxy = true;
 const jsonfile = require('jsonfile')
 
-/**
- *
- */
 app.use(async ctx => {
   const request = ctx.request.query.request;
   const requestKey = ctx.request.query.key;
@@ -28,7 +25,11 @@ app.use(async ctx => {
 });
 
 const port = process.env.npm_config_port || 3000
-app.listen(port, () => console.log('Server listening on', port))
+app.listen(port, function() {
+  console.log('Server listening on', port)
+  console.log('Server key is', process.env.npm_config_key)
+  console.log('Server times is', process.env.npm_config_times)
+})
 
 function clean(dataFile) {
   const obj = jsonfile.readFileSync(dataFile, {throws: false})
@@ -54,7 +55,7 @@ function add(ctx, dataFile) {
       time: Date()
     })
     jsonfile.writeFileSync(dataFile, obj, {spaces: 2})
-    ctx.body = "Successed!"
+    ctx.body = "Succeeded!"
   } else {
     obj.data.push({
       IP: ctx.request.ip,
@@ -62,7 +63,7 @@ function add(ctx, dataFile) {
     })
     obj.times++
     jsonfile.writeFileSync(dataFile, obj, {spaces: 2})
-    ctx.body = "Successed!"
+    ctx.body = "Succeeded!"
   }
 }
 
