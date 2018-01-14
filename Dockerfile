@@ -10,4 +10,4 @@ RUN apk add --no-cache git \
     && mkdir /dokidoki/data \
     && npm install
 
-CMD [ "npm", "start", "--port ${PORT}", "--key ${KEY}", "--times ${TIMES}" ]
+CMD [ "PORT=${PORT}", "KEY=${KEY}", "TIMES={TIMES}" "npm", "start" ]
