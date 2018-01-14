@@ -5,12 +5,14 @@ const Koa = require('koa');
 const app = new Koa();
 app.proxy = true;
 const jsonfile = require('jsonfile')
+const configPath = process.env.config_path || "./config.json"
+const config = jsonfile.readFileSync(configPath, {throws: false})
 
 app.use(async ctx => {
   const request = ctx.request.query.request;
   const requestKey = ctx.request.query.key;
   const device = ctx.request.query.device;
-  const configKey = process.env.KEY;
+  const configKey = config.key;
   if (requestKey === configKey && device) {
     const dataFile = './data/' + device + '.json'
     if (request === 'add') {
@@ -24,16 +26,16 @@ app.use(async ctx => {
   };
 });
 
-const port = process.env.PORT || 3000
+const port = config.port || 3000
 app.listen(port, function() {
-  console.log('Server listening on', port)
-  console.log('Server key is', process.env.KEY)
-  console.log('Server times is', process.env.TIMES)
+  console.log('Server listening on', config.port)
+  console.log('Server key is', config.key)
+  console.log('Server times is', config.times)
 })
 
 function clean(dataFile) {
   const obj = jsonfile.readFileSync(dataFile, {throws: false})
-  const times = process.env.TIMES
+  const times = config.times
   if (obj === null) {
     return
   } else {
