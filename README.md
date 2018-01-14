@@ -44,18 +44,22 @@ Use `_config.json` as sample.
 }
 ````
 `port`: which port should the app listen, default is 3000
+
 `key`: the authorized key
+
 `times`: after how many time the app should clean up data
 
 ## Example
 
 If your client IP is 5.5.5.5
+
 and server IP is 6.6.6.6, port is 3000, key is 1234567890, device is Ubuntu
 
 **All the reuqest can be used in curl or something like that**
 
 ### add
 `example.com/?request=add&key=[Your key here]&device=[Device name]`
+
 `6.6.6.6:3000/?request=add&key=1234567890&device=Ubuntu`
 
 If key is correct and device is set, the response should be `Succeeded!`
@@ -64,6 +68,7 @@ otherwise the response is 403 - `Forbidden`.
 
 ### get
 `example.com/?request=get&key=[Your key here]&device=[Device name]`
+
 `6.6.6.6:3000/?request=get&key=1234567890&device=Ubuntu`
 
 ```` json
