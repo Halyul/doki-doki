@@ -5,16 +5,14 @@
 This is a small app that can get client IP
 
 ## Usage
+
 ### Directly
 ```` bash
 $ git clone https://github.com/Halyul/doki-doki.git
 $ cd doki-doki
 $ npm i
-$ npm start --port [Your port] --key [Your key] --times [Number]
+$ npm start
 ````
-`port`: which port should the app listen, default is 3000
-`key`: the authorized key
-`times`: after how many time the app should clean up data
 
 ### Docker
 I just tested docker-compose, so I will just provide how to configure
@@ -31,18 +29,32 @@ services:
         protocol: tcp
         mode: host
     volumes:
-      - ./data:/dokidoki/data:rw
-    environment:
-      - KEY=1234567890
-      - TIMES=20
+      - ./data:/dokidoki/data:rw # this folder stores json files
+      - ./_config.json:/dokidoki/_config.json:ro # this is the config file
 ````
 In order to get real client IP, you should use 3.2+ version of configuration file and with such `ports` configuration.
+
+## Config
+Use `_config.json` as sample.
+```` json
+{
+  "port": 3000,
+  "key": "abcd1234",
+  "times": 20
+}
+````
+`port`: which port should the app listen, default is 3000
+`key`: the authorized key
+`times`: after how many time the app should clean up data
+
 ## Example
 
-If your IP is 5.5.5.5
+If your client IP is 5.5.5.5
+and server IP is 6.6.6.6, port is 3000, key is 1234567890, device is Ubuntu
 
 ### add
 `example.com/?request=add&key=[Your key here]&device=[Device name]`
+`6.6.6.6:3000/?request=add&key=1234567890&device=Ubuntu`
 
 If key is correct and device is set, the response should be `Succeeded!`
 
@@ -50,6 +62,7 @@ otherwise the response is 403 - `Forbidden`.
 
 ### get
 `example.com/?request=get&key=[Your key here]&device=[Device name]`
+`6.6.6.6:3000/?request=get&key=1234567890&device=Ubuntu`
 
 ```` json
 {
