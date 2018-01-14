@@ -1,4 +1,4 @@
-#Doki Doki
+# Doki Doki
 
 这是一个获取客户端IP的小程序
 
@@ -51,6 +51,8 @@ Use `_config.json` as sample.
 
 If your client IP is 5.5.5.5
 and server IP is 6.6.6.6, port is 3000, key is 1234567890, device is Ubuntu
+
+**All the reuqest can be used in curl or something like that**
 
 ### add
 `example.com/?request=add&key=[Your key here]&device=[Device name]`
