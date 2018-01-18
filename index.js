@@ -71,7 +71,7 @@ function add(ctx, dataFile) {
 function get(ctx, dataFile) {
   const obj = jsonfile.readFileSync(dataFile, {throws: false})
   if (obj === null) {
-    ctx.response.status = 403
+    ctx.response.status = 404
   } else {
     ctx.body = obj
   }
