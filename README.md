@@ -46,6 +46,9 @@ Use `_config.json` as sample.
 }
 ````
 `public`: this can be used in public or not
+
+`host`: the site url
+
 `port`: which port should the app listen, default is 3000
 
 `key`: the authorized key
