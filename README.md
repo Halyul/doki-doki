@@ -18,7 +18,7 @@ $ npm start
 I just tested docker-compose, so I will just provide how to configure
 
 ```` yaml
-version: '3.2'
+version: '3.2' # require 3.2+
 services:
   dokidoki:
     build:
