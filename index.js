@@ -20,7 +20,7 @@ app.use(async ctx => {
 
 const port = config.port || 3000;
 app.listen(port, function() {
-  console.log('Server listening on', config.port);
+  console.log('Server listening on', port);
   console.log('Is server running in public mode?', config.public);
   console.log('Server key is', config.key);
   console.log('Server times is', config.times);
